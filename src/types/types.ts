@@ -149,7 +149,7 @@ export interface IProject {
   description: string;
   project_type: string;
   project_priority: string;
-  project_tools: string[];
+  project_tools?: string[];
 }
 
 export interface IProjectResponse {

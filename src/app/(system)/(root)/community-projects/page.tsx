@@ -7,26 +7,59 @@ import useEndpoints from "@/hooks/use_endpoints";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "@/components/spinner";
 import PageTitle from "../components/pagetitle";
+import { IProject } from "@/types/types";
+import { DataTable } from "./components/data-table";
+import { columns } from "./components/columns";
+
+const projects: IProject[] = [
+  {
+    id: "1",
+    name: "Project 1",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    project_priority: "LOW PRIORITY",
+    project_type: "PAID",
+    project_tools: ["react", "nextjs", "tailwind"],
+  },
+  {
+    id: "2",
+    name: "Project 2",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    project_priority: "HIGH PRIORITY",
+    project_type: "COMMUNITY",
+    project_tools: ["react", "nextjs", "tailwind"],
+  },
+  {
+    id: "3",
+    name: "Project 3",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    project_priority: "MEDIUM PRIORITY",
+    project_type: "COMMUNITY",
+    project_tools: ["react", "nextjs", "tailwind"],
+  },
+];
 
 function CommunityProjectsPage() {
   const [isAdmin] = useState<boolean>(true);
   const [query, setQuery] = useState<string>("");
   const { getProjects } = useEndpoints();
 
-  const {
-    data: Projects,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ["projects"],
-    queryFn: () => getProjects(),
-    refetchOnWindowFocus: false,
-    retry: 3,
-  });
+  // const {
+  //   data: Projects,
+  //   isLoading,
+  //   isError,
+  // } = useQuery({
+  //   queryKey: ["projects"],
+  //   queryFn: () => getProjects(),
+  //   refetchOnWindowFocus: false,
+  //   retry: 3,
+  // });
 
-  const projectList = Projects?.data.items;
+  // const projectList = Projects?.data.items;
 
-  const filteredItems = projectList?.filter((item) => {
+  const filteredItems = projects?.filter((item) => {
     const projectMatch = item?.name
       ?.toLowerCase()
       .includes(query.toLowerCase());
@@ -59,50 +92,18 @@ function CommunityProjectsPage() {
         </section>
         <section className="p-5">
           <div className="relative overflow-x-auto">
-            {isLoading && <Spinner />}
+            {/* {isLoading && <Spinner />} */}
 
-            {Projects &&
+            {projects &&
               (filteredItems?.length! > 0 ? (
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                  <thead className="text-xs uppercase">
-                    <tr>
-                      <th scope="col" className="px-6 py-3">
-                        Project name
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        Project type
-                      </th>
-                      <th scope="col" className="px-6 py-3">
-                        Project Priority
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredItems?.map((item) => {
-                      return (
-                        <tr
-                          key={item.name}
-                          className="dark:bg-[#121212] text-black dark:text-white border-b w-full"
-                        >
-                          <td className="px-6 py-3">{item.name}</td>
-                          <td className="px-6 py-3">
-                            {<StatusCheck project_type={item.project_type} />}
-                          </td>
-                          <td className="px-6 py-3">
-                            {<StatusCheck priority={item?.project_priority} />}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
+                <DataTable columns={columns} data={filteredItems} />
               ) : (
                 <h1 className="text-center text-2xl text-[#777777]">
                   Sorry, this project does not exist.
                 </h1>
               ))}
 
-            {isError && <h1>Data Failed to load</h1>}
+            {/* {isError && <h1>Data Failed to load</h1>} */}
           </div>
         </section>
       </section>

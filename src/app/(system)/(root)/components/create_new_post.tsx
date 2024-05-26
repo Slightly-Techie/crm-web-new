@@ -5,14 +5,14 @@ import { IPost } from "@/types/types";
 import Image from "next/image";
 // import { usePostFeeds } from "./FeedServices";
 
-import { XIcon, ImageUpIcon } from 'lucide-react'
+import { XIcon, ImageUpIcon } from "lucide-react";
 import useEndpoints from "@/hooks/use_endpoints";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 export type NewPostFields = Pick<IPost, "content" | "feed_pic_url">;
 
 function CreatePost() {
-//   const { createNewPost } = usePostFeeds();
+  //   const { createNewPost } = usePostFeeds();
   const [postText, setPostText] = React.useState("");
   const { getUserProfile } = useEndpoints();
   const session = useSession();
