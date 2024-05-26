@@ -1,3 +1,11 @@
-export default function AllTechiesPage() {
-  return <h3>All techies page</h3>;
+"use client";
+import dynamic from "next/dynamic";
+import Team from "./components/team";
+
+export default function TechiesList() {
+  return (
+    <div className="w-full h-full">
+      <Team />
+    </div>
+  );
 }

@@ -55,6 +55,8 @@ const useEndpoints = () => {
   const postProjects = <T>(payload: T) =>
     authAxios.post(`api/v1/projects/`, payload);
 
+  const getStacks = () => axios.get<IStack[]>(`/api/v1/stacks/`);
+
   return {
     getUserProfile,
     updateUserProfile,
@@ -66,6 +68,7 @@ const useEndpoints = () => {
     postProjects,
     updateProfilePicture,
     searchTechie,
+    getStacks,
     searchApplicant,
   };
 };

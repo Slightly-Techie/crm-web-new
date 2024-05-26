@@ -98,7 +98,7 @@ export type NewUserFields = {
 
 export interface IPost {
   content: string;
-  feed_pic_url: Blob | string;
+  feed_pic_url?: Blob | string;
   id: string;
   created_at?: string;
   user: {
@@ -106,7 +106,7 @@ export interface IPost {
     last_name: string;
     profile_pic_url: string;
     username: string;
-    id?: string;
+    id?: number;
   };
 }
 
