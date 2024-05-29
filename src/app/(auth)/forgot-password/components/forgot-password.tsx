@@ -74,7 +74,7 @@ function ForgotPasswordForm() {
               />
               <br />
               <Link href={`/login`}>
-                <p className="text-sm text-neutral-600 underline underline-offset-4 hover:text-white ease-in duration-200">
+                <p className="text-sm text-neutral-600 underline underline-offset-4 hover:text-primary ease-in duration-200">
                   I remember my password
                 </p>
               </Link>
