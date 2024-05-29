@@ -1,7 +1,7 @@
 import { NextAuthOptions, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "./axios";
-import jwt from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -51,7 +51,7 @@ export const authOptions: NextAuthOptions = {
       const tokenParts: {
         exp: number;
         sub: string;
-      } = jwt.jwtDecode(token.token as string);
+      } = jwtDecode(token.token as string);
       if (Date.now() < tokenParts.exp * 1000) {
         return token;
       }

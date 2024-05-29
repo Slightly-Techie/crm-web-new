@@ -7,6 +7,7 @@ import { getSkillsArray } from "@/utils";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import SubmissionStatus from "./forms/submit_status";
+import { Button } from "@/components/ui/button";
 
 let NEW_USER_DATA: Partial<NewUserFields> = INITIAL_USER_DATA;
 
@@ -54,79 +55,38 @@ export default function SignUpForm() {
       <div className="lg:col-span-1 w-full flex items-center">
         <div className="w-full">
           {isActive ? (
-            // <div className="max-w-md mx-auto px-6">
-            //   <h4 className="scroll-m-20 text-2xl font-semibold tracking-tight">
-            //     Welcome to CRM
-            //   </h4>
-            //   <p className="text-sm text-neutral-600 mt-2">
-            //     Already have an account?{" "}
-            //     <span className="font-semibold text-black dark:text-white">
-            //       <Link href={`/login`}>Log In</Link>
-            //     </span>
-            //   </p>
-            //   <br />
-            //   <Form {...form}>
-            //     <form
-            //       onSubmit={form.handleSubmit(onSubmit)}
-            //       className="space-y-8 w-full"
-            //     >
-            //       <FormField
-            //         control={form.control}
-            //         name="email"
-            //         render={({ field }) => (
-            //           <FormItem>
-            //             <FormLabel>Email</FormLabel>
-            //             <FormControl>
-            //               <Input type="text" {...field} autoFocus />
-            //             </FormControl>
-            //             <FormMessage />
-            //           </FormItem>
-            //         )}
-            //       />
-            //       <FormField
-            //         control={form.control}
-            //         name="password"
-            //         render={({ field }) => (
-            //           <FormItem>
-            //             <FormLabel>Password</FormLabel>
-            //             <FormControl>
-            //               <Input type="password" {...field} />
-            //             </FormControl>
-            //             <FormMessage />
-            //           </FormItem>
-            //         )}
-            //       />
-            //       <Button type="submit" className="w-full">
-            //         Sign Up
-            //       </Button>
-            //     </form>
-            //   </Form>
-            // </div>
-            <div className="p-8 w-full md:w-[30rem] lg:w-5/6 mx-auto my-auto flex flex-col gap-4 justify-center h-full">
+            <div className="p-8 w-full md:w-[30rem] lg:w-4/6 mx-auto my-auto flex flex-col gap-4 justify-center h-full">
               <section className=" text-[#000] dark:text-[#f1f3f7]  text-[1.5rem] font-bold flex items-center gap-4">
                 {currentFormIndex !== 0 && (
-                  <button
+                  <Button
                     onClick={previous}
                     type="button"
-                    className="px-2 py-2 bg-[#fff] border border-[#333] hover:bg-[#333] dark:bg-[#F1F3F7] dark:hover:bg-[#ffffff] text-[#f1f3f7]  dark:text-[#000] rounded-full"
+                    size={"icon"}
+                    className="rounded-full"
+                    variant={"outline"}
                   >
                     <ArrowLeft />
-                  </button>
+                  </Button>
                 )}
                 <div>
-                  <h3>Welcome to CRM🎉</h3>
-                  <p className="text-[#777] text-[20px] font-normal">
-                    Create your account
+                  <h3>Welcome to CRM 🎉</h3>
+                  <p className="text-sm text-neutral-600 mt-2">
+                    Already have an account?{" "}
+                    <span className="font-semibold text-black dark:text-white">
+                      <Link href={`/login`} className="hover:underline">
+                        Sign In
+                      </Link>
+                    </span>
                   </p>
                 </div>
               </section>
               <form onSubmit={handleSubmit(onSubmit)}>
                 {currentForm.element}
-                <section className="flex gap-4 mb-8">
+                <section className="flex gap-4 my-8">
                   {currentFormIndex <= 3 && (
-                    <button className="px-8 py-2 bg-[#001] hover:bg-[#333] dark:bg-[#F1F3F7] dark:hover:bg-[#ffffff] text-[#f1f3f7] dark:text-[#000] rounded-lg w-full">
+                    <Button className="w-full">
                       {currentFormIndex === 3 ? "Submit" : "Proceed"}
-                    </button>
+                    </Button>
                   )}
                 </section>
               </form>
